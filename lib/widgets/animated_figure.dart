@@ -15,6 +15,42 @@ class _AnimatedFigureState extends State<AnimatedFigure>
   late Animation<Alignment> _alignment;
   late Animation<double> _rotationAngle;
 
+  TweenSequenceItem<Alignment> _createAlignmentTweenSequenceItem({
+    required Alignment initialValue,
+    required Alignment finalValue,
+    required Interval interval,
+  }) {
+    return TweenSequenceItem<Alignment>(
+      tween: Tween<Alignment>(
+        begin: initialValue,
+        end: finalValue,
+      ).chain(
+        CurveTween(
+          curve: interval,
+        ),
+      ),
+      weight: 1.0,
+    );
+  }
+
+  TweenSequenceItem<double> _createRotationAngleTweenSequenceItem({
+    required double initialValue,
+    required double finalValue,
+    required Interval interval,
+  }) {
+    return TweenSequenceItem<double>(
+      tween: Tween<double>(
+        begin: initialValue,
+        end: finalValue,
+      ).chain(
+        CurveTween(
+          curve: interval,
+        ),
+      ),
+      weight: 1.0,
+    );
+  }
+
   @override
   void initState() {
     super.initState();
@@ -85,40 +121,10 @@ class _AnimatedFigureState extends State<AnimatedFigure>
     );
   }
 
-  TweenSequenceItem<Alignment> _createAlignmentTweenSequenceItem({
-    required Alignment initialValue,
-    required Alignment finalValue,
-    required Interval interval,
-  }) {
-    return TweenSequenceItem<Alignment>(
-      tween: Tween<Alignment>(
-        begin: initialValue,
-        end: finalValue,
-      ).chain(
-        CurveTween(
-          curve: interval,
-        ),
-      ),
-      weight: 1.0,
-    );
-  }
-
-  TweenSequenceItem<double> _createRotationAngleTweenSequenceItem({
-    required double initialValue,
-    required double finalValue,
-    required Interval interval,
-  }) {
-    return TweenSequenceItem<double>(
-      tween: Tween<double>(
-        begin: initialValue,
-        end: finalValue,
-      ).chain(
-        CurveTween(
-          curve: interval,
-        ),
-      ),
-      weight: 1.0,
-    );
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -138,7 +144,7 @@ class _AnimatedFigureState extends State<AnimatedFigure>
                   width: 160.0,
                   decoration: BoxDecoration(
                     border: Border.all(
-                      color: Colors.yellow,
+                      color: Colors.green,
                       width: 2.0,
                     ),
                   ),
@@ -151,7 +157,7 @@ class _AnimatedFigureState extends State<AnimatedFigure>
                   child: Container(
                     height: 40.0,
                     width: 40.0,
-                    color: Colors.blue,
+                    color: Colors.red[400],
                   ),
                 ),
               ),

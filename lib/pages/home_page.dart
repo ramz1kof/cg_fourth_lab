@@ -6,8 +6,11 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Fourth CG lab'),
+      ),
+      body: const Center(
         child: AnimatedFigure(),
       ),
     );
